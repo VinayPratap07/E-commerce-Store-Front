@@ -1,1 +1,17 @@
 @import "tailwindcss";
+
+@layer components {
+  .headerNavLink {
+    @apply mx-1 p-2 text-xl font-semibold text-[#111827] hover:text-[#3B82F6];
+  }
+
+  .textFont {
+    @apply font-sans;
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-[#F9FAFB];
+  }
+}
