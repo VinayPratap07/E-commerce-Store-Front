@@ -1,12 +1,26 @@
+@font-face {
+  font-family: Inter;
+  src: url(assets/Fonts/Inter_18pt-Medium.ttf);
+}
+@font-face {
+  font-family: Poppins;
+  src: url(assets/Fonts/Poppins-Bold.ttf);
+}
+
 @import "tailwindcss";
+
+@theme {
+  --font-Inter: Inter, "sans-serif";
+  --font-Poppins: Poppins, "sans-serif";
+}
 
 @layer components {
   .headerNavLink {
-    @apply mx-1 p-2 text-xl font-semibold text-[#111827] hover:text-[#3B82F6];
+    @apply mx-1 p-2 text-lg text-[#111827] hover:text-[#3B82F6];
   }
 
   .textFont {
-    @apply font-sans;
+    @apply font-Inter;
   }
 }
 
