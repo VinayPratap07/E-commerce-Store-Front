@@ -1,6 +1,9 @@
+import HeroImage from "../HeroImage/HeroImage";
+
 function Home() {
   return (
-    <div className="grid grid-cols-4">
+    <div className="w-full h-full">
+      <HeroImage />
       <h1 className="my-10 text-blue-400 text-5xl">Home</h1>
     </div>
   );

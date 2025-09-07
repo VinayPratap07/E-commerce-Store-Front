@@ -6,26 +6,39 @@
   font-family: Poppins;
   src: url(assets/Fonts/Poppins-Bold.ttf);
 }
+@font-face {
+  font-family: Epunda;
+  src: url(assets/Fonts/EpundaSlab-Medium.ttf);
+}
+@font-face {
+  font-family: PlusJakarta;
+  src: url(assets/Fonts/PlusJakartaSans-Medium.ttf);
+}
 
 @import "tailwindcss";
 
 @theme {
   --font-Inter: Inter, "sans-serif";
   --font-Poppins: Poppins, "sans-serif";
+  --font-Epunda: Epunda, "sans-serif";
+  --font-Jakarta: PlusJakarta, "sans-serif";
 }
 
 @layer components {
   .headerNavLink {
-    @apply mx-1 p-2 text-lg text-[#111827] hover:text-[#3B82F6];
+    @apply px-3 py-2 text-base text-[#111827] font-normal transform transition-transform duration-200 hover:scale-105 hover:border-b-1 hover:border-black hover:font-medium;
+  }
+  .mobileNavLink {
+    @apply py-2 text-xl text-black hover:text-blue-600;
   }
 
   .textFont {
-    @apply font-Inter;
+    @apply font-Jakarta;
   }
 }
 
 @layer base {
   body {
-    @apply bg-[#F9FAFB];
+    @apply bg-[#f5f2f1];
   }
 }

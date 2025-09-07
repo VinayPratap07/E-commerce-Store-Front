@@ -1,40 +1,180 @@
 import { NavLink } from "react-router-dom";
 
+type IconProps = {
+  className?: string; // className is an optional string
+};
+
+const SearchIcon = ({ className }: IconProps) => (
+  <svg
+    className={className}
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    strokeWidth={1.5}
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+    />
+  </svg>
+);
+
+const MenuIcon = ({ className }: IconProps) => (
+  <svg
+    className={className}
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    strokeWidth={2}
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M4 6h16M4 12h16M4 18h16"
+    />
+  </svg>
+);
+
+const CloseIcon = ({ className }: IconProps) => (
+  <svg
+    className={className}
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    strokeWidth={2}
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M6 18L18 6M6 6l12 12"
+    />
+  </svg>
+);
+const CartIcon = ({ className }: IconProps) => (
+  <svg
+    className={className}
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    strokeWidth={1.5}
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+    />
+  </svg>
+);
+const WishlistIcon = ({ className }: IconProps) => (
+  <svg
+    className={className}
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    strokeWidth={2}
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M4.318 6.318a4.5 4.5 0 016.364 0L12 7.672l1.318-1.354a4.5 4.5 0 116.364 6.364L12 20.364l-7.682-7.682a4.5 4.5 0 010-6.364z"
+    />
+  </svg>
+);
+
+const UserIcon = ({ className }: IconProps) => (
+  <svg
+    className={className}
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    strokeWidth={1.5}
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+    />
+  </svg>
+);
+const LightIcon = ({ className }: IconProps) => (
+  <svg
+    className={className}
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    strokeWidth={2}
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+    />
+  </svg>
+);
+
 function Header() {
   return (
-    <div className="container max-w-screen shadow-[0_2px_4px_rgba(0,0,0,0.1)]">
-      <header className="flex justify-between items-center h-20 w-full shrink-0 md:px-6">
-        <h1 className="font-Poppins text-4xl text-[#111827] w-1/4 pl-20">
-          Velora
-        </h1>
-
-        <form className="w-2/4">
-          <button type="submit" className="text-xl">
-            <i className="fa-solid fa-magnifying-glass" />
-          </button>
-          <input
-            type="text"
-            className="border-b w-17/20 mx-6 p-1 text-l hover:border-b-[#3B82F6] focus:border-b-[#3B82F6] focus:outline-none"
-            placeholder="Search for products...."
-          />
-        </form>
-
-        <div className="flex justify-evenly w-2/4 pr-20">
-          <NavLink to="/" className="headerNavLink textFont">
-            Home
-          </NavLink>
-          <NavLink to="/cart" className="headerNavLink textFont">
-            Cart
-          </NavLink>
-          <NavLink to="/wishlist" className="headerNavLink textFont">
-            Wishlist
-          </NavLink>
-          <button className="p-1 border border-[#6B7280] ">Light</button>
-          <button className="textFont p-2 bg-[#3B82F6] rounded-md font-bold text-white text-xl hover:bg-[#2563EB]">
-            LogIn
-          </button>
+    <div className="grid-cols-2 text-center h-40 w-full rounded-4xl p-5 pt-5 shadow-xl/20">
+      <div className="flex justify-between items-start h-1/2">
+        {/* First box */}
+        <div className="w-1/3 h-full  p-2">
+          <LightIcon className="h-5 w-5" />
         </div>
-      </header>
+
+        {/* Second Box */}
+        <div className="flex w-1/3 h-full p-2 justify-center items-start">
+          <NavLink to="/">
+            <h1 className="font-Epunda text-3xl md:text-4xl text-[#111827] tracking-widest">
+              VELORA
+            </h1>
+          </NavLink>
+        </div>
+
+        {/* Third box */}
+        <div className=" flex justify-end items-start w-1/3 h-1/2 p-2 pr-5 text-xl textFont ">
+          {/*Inside Box*/}
+          <div className="hidden md:flex justify-center items-center w-1/2 border-b border-gray-200 focus-within:border-gray-700">
+            <button type="submit" className="text-black p-2">
+              <SearchIcon className="h-5 w-5" />
+            </button>
+            <input
+              type="text"
+              className="w-full p-2 text-sm bg-transparent focus:outline-none"
+              placeholder="Search "
+            />
+          </div>
+
+          <NavLink to="/cart" className="headerNavLink textFont">
+            <CartIcon className="h-5 w-5" />
+          </NavLink>
+          <NavLink to="/" className="headerNavLink textFont ">
+            <UserIcon className="h-5 w-5" />
+          </NavLink>
+        </div>
+      </div>
+
+      <div className="flex justify-between items-end mx-auto w-1/3 h-1/2">
+        <NavLink to="/" className="headerNavLink textFont">
+          Men
+        </NavLink>
+        <NavLink to="/" className="headerNavLink  textFont">
+          Women
+        </NavLink>
+        <NavLink to="/" className="headerNavLink textFont ">
+          Kids
+        </NavLink>
+        <NavLink to="/" className="headerNavLink textFont">
+          Electronics
+        </NavLink>
+      </div>
     </div>
   );
 }
