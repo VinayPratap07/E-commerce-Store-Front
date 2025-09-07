@@ -42,3 +42,7 @@
     @apply bg-[#f5f2f1];
   }
 }
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}

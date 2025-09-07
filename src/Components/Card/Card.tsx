@@ -1,23 +1,79 @@
+import { useQuery } from "@tanstack/react-query";
+import { productApi } from "../../API/ApiCall";
+import type { productType } from "../../API/ApiResponse";
+
+async function fetchProduct() {
+  const res = await productApi();
+  console.log(res);
+  return res;
+}
+
 function Card() {
+  const {
+    isLoading,
+    error,
+    data: products,
+  } = useQuery<productType[]>({
+    queryKey: ["product"],
+    queryFn: fetchProduct,
+    staleTime: 1000,
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+  });
+
+  if (isLoading) {
+    return <div>Loading</div>;
+  }
+  if (error) {
+    return <div>Error</div>;
+  }
+
   return (
-    <div className="textFont flex flex-wrap justify-center rounded-lg w-2xs h-100 p-0 m-5 shadow-lg hover:shadow-xl/20 transition delay-10 duration-300 ease hover:-translate-y-1 hover:scale-100">
-      <img
-        className="w-full object-cover py-2 rounded-lg"
-        src="../public/Product.png"
-        alt="Product"
-      />
-      <div className="grid grid-cols-2 w-full p-2 ">
-        <p className="text-[#111827] text-xl mt-2 ml-3">Shampoo</p>
-        <button className="w-10 h-10 ml-17 border border-[#6B7280] rounded-full font-bold text-[#FB7185] text-xl hover:text-white hover:bg-[#FB7185]">
-          <i className="fa-regular fa-heart"></i>
-        </button>
-        <p className="text-[#111827] text-xl mt-2 ml-3">$999.00</p>
-        <button className="w-10 h-10 ml-17 border border-[#6B7280] rounded-full font-bold text-[#6B7280] text-xl hover:bg-[#6B7280] hover:text-white">
-          <i className="fa-solid fa-cart-shopping"></i>
-        </button>
-      </div>
-    </div>
+    <>
+      {/*Do Fonts*/}
+      {products?.map((product) => (
+        <div
+          className=" flex-shrink-0 rounded-lg w-64 h-full p-0 m-2  transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-100"
+          key={product.id}
+        >
+          <img
+            className="w-full h-2/3 object-contain py-2 rounded-lg"
+            src={product.image}
+            alt="Product"
+          />
+          <div className=" text-center w-full p-2 ">
+            <p className=" text-[#111827] text-lg font-semibold mt-2 ">
+              {product.title}
+            </p>
+            <p className=" text-[#111827] text-md font-semibold mt-2 ">
+              {/* <StarIcon key={index} className="h-5 w-5" filled={index < rating} /> */}
+              Ratings
+            </p>
+            <p className="text-[#111827] text-md mt-2 font-normal">
+              {`$${product.price}`}
+            </p>
+          </div>
+        </div>
+      ))}
+    </>
   );
 }
 
 export default Card;
+
+const StarIcon = ({
+  className,
+  filled,
+}: {
+  className?: string;
+  filled: boolean;
+}) => (
+  <svg
+    className={`${className} ${filled ? "text-yellow-400" : "text-gray-300"}`}
+    fill="currentColor"
+    viewBox="0 0 20 20"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+  </svg>
+);
