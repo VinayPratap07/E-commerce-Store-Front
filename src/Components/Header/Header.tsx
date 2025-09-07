@@ -1,5 +1,66 @@
 import { NavLink } from "react-router-dom";
 
+function Header() {
+  return (
+    <div className="sticky z-40 top-0 right-0 left-0 grid-cols-2 text-center bg-[#f5f2f1] h-40 w-full rounded-b-4xl p-5 pt-5 shadow-xl/20">
+      <div className="flex justify-between items-start h-1/2">
+        {/* First box */}
+        <div className="w-1/3 h-full  p-2">
+          <LightIcon className="h-5 w-5" />
+        </div>
+
+        {/* Second Box */}
+        <div className="flex w-1/3 h-full p-2 justify-center items-start">
+          <NavLink to="/">
+            <h1 className="font-Epunda text-3xl md:text-4xl text-[#111827] tracking-widest">
+              VELORA
+            </h1>
+          </NavLink>
+        </div>
+
+        {/* Third box */}
+        <div className=" flex justify-end items-start w-1/3 h-1/2 p-2 pr-5 text-xl textFont ">
+          {/*Inside Box*/}
+          <div className="hidden md:flex justify-center items-center w-1/2 border-b border-gray-200 focus-within:border-gray-700">
+            <button type="submit" className="text-black p-2">
+              <SearchIcon className="h-5 w-5" />
+            </button>
+            <input
+              type="text"
+              className="w-full p-2 text-sm bg-transparent focus:outline-none"
+              placeholder="Search "
+            />
+          </div>
+
+          <NavLink to="/cart" className="headerNavLink textFont">
+            <CartIcon className="h-5 w-5" />
+          </NavLink>
+          <NavLink to="/" className="headerNavLink textFont ">
+            <UserIcon className="h-5 w-5" />
+          </NavLink>
+        </div>
+      </div>
+
+      <div className="flex justify-between items-end mx-auto w-1/3 h-1/2">
+        <NavLink to="/" className="headerNavLink textFont">
+          Men
+        </NavLink>
+        <NavLink to="/" className="headerNavLink  textFont">
+          Women
+        </NavLink>
+        <NavLink to="/" className="headerNavLink textFont ">
+          Kids
+        </NavLink>
+        <NavLink to="/" className="headerNavLink textFont">
+          Electronics
+        </NavLink>
+      </div>
+    </div>
+  );
+}
+
+export default Header;
+
 type IconProps = {
   className?: string; // className is an optional string
 };
@@ -119,64 +180,3 @@ const LightIcon = ({ className }: IconProps) => (
     />
   </svg>
 );
-
-function Header() {
-  return (
-    <div className="grid-cols-2 text-center h-40 w-full rounded-4xl p-5 pt-5 shadow-xl/20">
-      <div className="flex justify-between items-start h-1/2">
-        {/* First box */}
-        <div className="w-1/3 h-full  p-2">
-          <LightIcon className="h-5 w-5" />
-        </div>
-
-        {/* Second Box */}
-        <div className="flex w-1/3 h-full p-2 justify-center items-start">
-          <NavLink to="/">
-            <h1 className="font-Epunda text-3xl md:text-4xl text-[#111827] tracking-widest">
-              VELORA
-            </h1>
-          </NavLink>
-        </div>
-
-        {/* Third box */}
-        <div className=" flex justify-end items-start w-1/3 h-1/2 p-2 pr-5 text-xl textFont ">
-          {/*Inside Box*/}
-          <div className="hidden md:flex justify-center items-center w-1/2 border-b border-gray-200 focus-within:border-gray-700">
-            <button type="submit" className="text-black p-2">
-              <SearchIcon className="h-5 w-5" />
-            </button>
-            <input
-              type="text"
-              className="w-full p-2 text-sm bg-transparent focus:outline-none"
-              placeholder="Search "
-            />
-          </div>
-
-          <NavLink to="/cart" className="headerNavLink textFont">
-            <CartIcon className="h-5 w-5" />
-          </NavLink>
-          <NavLink to="/" className="headerNavLink textFont ">
-            <UserIcon className="h-5 w-5" />
-          </NavLink>
-        </div>
-      </div>
-
-      <div className="flex justify-between items-end mx-auto w-1/3 h-1/2">
-        <NavLink to="/" className="headerNavLink textFont">
-          Men
-        </NavLink>
-        <NavLink to="/" className="headerNavLink  textFont">
-          Women
-        </NavLink>
-        <NavLink to="/" className="headerNavLink textFont ">
-          Kids
-        </NavLink>
-        <NavLink to="/" className="headerNavLink textFont">
-          Electronics
-        </NavLink>
-      </div>
-    </div>
-  );
-}
-
-export default Header;

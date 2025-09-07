@@ -9,6 +9,7 @@ export const heroImageApi = async () => {
   return res.data;
 };
 
+//FakeStoreAPI
 export const productApi = async () => {
   const res = await axios.get("https://fakestoreapi.com/products");
   return res.data;
