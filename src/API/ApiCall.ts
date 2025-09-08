@@ -9,8 +9,8 @@ export const heroImageApi = async () => {
   return res.data;
 };
 
-//FakeStoreAPI
+//Dummy Json api
 export const productApi = async () => {
-  const res = await axios.get("https://fakestoreapi.com/products");
+  const res = await axios.get("https://dummyjson.com/products");
   return res.data;
 };

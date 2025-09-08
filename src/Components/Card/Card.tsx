@@ -1,14 +1,22 @@
 import { useQuery } from "@tanstack/react-query";
 import { productApi } from "../../API/ApiCall";
 import type { productType } from "../../API/ApiResponse";
+import { addToCart } from "../../Slices/CartSlice.ts";
+import { useDispatch } from "react-redux";
 
 async function fetchProduct() {
   const res = await productApi();
-  console.log(res);
-  return res;
+  console.log(res.products);
+  return res.products;
 }
 
 function Card() {
+  const dispatch = useDispatch();
+
+  const addToCartHandler = (productId: number) => {
+    dispatch(addToCart(productId));
+  };
+
   const {
     isLoading,
     error,
@@ -31,30 +39,43 @@ function Card() {
   return (
     <>
       {/*Do Fonts*/}
-      {products?.map((product) => (
-        <div
-          className=" flex-shrink-0 rounded-lg w-64 h-full p-0 m-2  transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-100"
-          key={product.id}
-        >
-          <img
-            className="w-full h-2/3 object-contain py-2 rounded-lg"
-            src={product.image}
-            alt="Product"
-          />
-          <div className=" text-center w-full p-2 ">
-            <p className=" text-[#111827] text-lg font-semibold mt-2 ">
-              {product.title}
-            </p>
-            <p className=" text-[#111827] text-md font-semibold mt-2 ">
-              {/* <StarIcon key={index} className="h-5 w-5" filled={index < rating} /> */}
-              Ratings
-            </p>
-            <p className="text-[#111827] text-md mt-2 font-normal">
-              {`$${product.price}`}
-            </p>
+      {products
+        ?.filter((product) => product.category !== "groceries")
+        .map((product) => (
+          <div
+            className=" flex-shrink-0 rounded-lg w-64 h-full p-0 m-2  transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-100"
+            key={product.id}
+          >
+            <img
+              className="w-full h-2/3 object-contain py-2 rounded-lg"
+              src={product.thumbnail}
+              alt="Product"
+            />
+            <div className=" text-center w-full p-2 ">
+              <p className=" text-[#111827] text-lg font-semibold mt-2 ">
+                {product.title}
+              </p>
+              <p className="flex justify-center text-[#111827] text-md font-semibold mt-2 ">
+                {[...Array(5)].map((_, index) => (
+                  <StarIcon
+                    key={index}
+                    className="h-5 w-5"
+                    filled={index < product.rating}
+                  />
+                ))}
+              </p>
+              <p className="text-[#111827] text-md mt-2 font-normal">
+                {`$${product.price}`}
+              </p>
+            </div>
+            <button
+              className="border"
+              onClick={() => addToCartHandler(product.id)}
+            >
+              Cart
+            </button>
           </div>
-        </div>
-      ))}
+        ))}
     </>
   );
 }
@@ -69,7 +90,7 @@ const StarIcon = ({
   filled: boolean;
 }) => (
   <svg
-    className={`${className} ${filled ? "text-yellow-400" : "text-gray-300"}`}
+    className={`${className} ${filled ? "text-black" : "text-[#b2b2b2]"}`}
     fill="currentColor"
     viewBox="0 0 20 20"
     xmlns="http://www.w3.org/2000/svg"
