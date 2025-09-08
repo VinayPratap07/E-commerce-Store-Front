@@ -14,3 +14,9 @@ export const productApi = async () => {
   const res = await axios.get("https://dummyjson.com/products");
   return res.data;
 };
+
+//DummyJson to get a single product by id
+export const productById = async (id: string) => {
+  const res = await axios.get(`https://dummyjson.com/products/${id}`);
+  return res.data;
+};

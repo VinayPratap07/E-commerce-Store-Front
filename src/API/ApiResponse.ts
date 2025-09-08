@@ -5,7 +5,7 @@ export interface productType {
   description: string;
   discountPercentage: number;
   id: number;
-  images: string;
+  images: string[];
   price: number;
   rating: number;
   returnPolicy: string;

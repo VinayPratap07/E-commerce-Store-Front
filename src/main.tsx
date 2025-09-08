@@ -9,6 +9,7 @@ import Wishlist from "./Components/Wishlist/Wishlist.tsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Provider } from "react-redux";
 import { store } from "./Store/Store.ts";
+import Page from "./Components/ProductPage/Page.tsx";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
       {
         path: "/wishlist",
         element: <Wishlist />,
+      },
+      {
+        path: "/:id",
+        element: <Page />,
       },
     ],
   },
