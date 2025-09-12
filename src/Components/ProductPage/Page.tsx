@@ -7,7 +7,6 @@ import { useDispatch } from "react-redux";
 
 function Page() {
   const { id } = useParams();
-
   async function fetchProductById() {
     const res = await productById(id as string);
     console.log(res);
@@ -28,7 +27,7 @@ function Page() {
 
   const dispatch = useDispatch();
 
-  const addToCartHandler = () => {
+  const addToCartHandler = async () => {
     dispatch(addToCart(product?.id));
   };
 
@@ -92,7 +91,7 @@ function Page() {
             </button>
             <button
               type="submit"
-              className="w-1/3 p-2 ml-4 bg-black rounded-4xl text-[#f7f3f7]"
+              className="w-1/3 p-2 ml-4 bg-black rounded-4xl text-[#f7f3f7] cursor-pointer"
               onClick={addToCartHandler}
             >
               Add to cart

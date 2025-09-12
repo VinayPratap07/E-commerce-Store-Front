@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 function Header() {
   return (
-    <div className="sticky z-40 top-0 right-0 left-0 grid-cols-2 text-center bg-[#f5f2f1] h-40 w-full rounded-b-4xl p-5 pt-5 shadow-xl/20">
+    <div className="sticky z-40 top-0 right-0 left-0 grid-cols-2 text-center bg-[#f5f2f1] h-40 w-full rounded-b-4xl p-5 pt-5 ">
       <div className="flex justify-between items-start h-1/2">
         {/* First box */}
         <div className="w-1/3 h-full  p-2">

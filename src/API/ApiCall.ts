@@ -1,6 +1,7 @@
 import axios from "axios";
+import { store } from "../Store/Store";
 
-const ACCESS_KEY = ""; //Hero Image API key
+const ACCESS_KEY = "SfnQPjSaLq9_Iq7wBbBT77jit3w_teT4apUGYhYD5lk"; //Hero Image API key
 
 export const heroImageApi = async () => {
   const res = await axios.get(
@@ -19,4 +20,29 @@ export const productApi = async () => {
 export const productById = async (id: string) => {
   const res = await axios.get(`https://dummyjson.com/products/${id}`);
   return res.data;
+};
+
+//Dummy json to create a cart
+export const createCart = async () => {
+  const state = store.getState();
+  const res = await axios.post("https://dummyjson.com/carts/add", {
+    userId: state.cart.userId,
+    products: state.cart.products,
+  });
+  console.log(res.data);
+  return res.data;
+};
+
+//Updating the cart
+export const updateCart = async () => {
+  const state = store.getState();
+  await createCart();
+  const res = await axios.put(
+    `https://dummyjson.com/carts/${state.cart.userId}`,
+    {
+      userId: state.cart.userId,
+      products: state.cart.products,
+    }
+  );
+  console.log("Cart synced:", res.data);
 };
