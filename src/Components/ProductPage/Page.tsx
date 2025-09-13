@@ -3,10 +3,16 @@ import { productById } from "../../API/ApiCall";
 import { useParams } from "react-router-dom";
 import type { productType } from "../../API/ApiResponse";
 import { addToCart } from "../../Slices/CartSlice.ts";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import type { RootState } from "../../Store/Store.ts";
 
 function Page() {
   const { id } = useParams();
+  const [quantity, setQuantity] = useState(1);
+  const dispatch = useDispatch();
+  const { products } = useSelector((state: RootState) => state.cart);
+
   async function fetchProductById() {
     const res = await productById(id as string);
     console.log(res);
@@ -25,10 +31,16 @@ function Page() {
     refetchOnMount: false,
   });
 
-  const dispatch = useDispatch();
-
   const addToCartHandler = async () => {
-    dispatch(addToCart(product?.id));
+    dispatch(
+      addToCart({
+        productId: product?.id,
+        productQuantity: quantity,
+        productImage: product?.thumbnail,
+        productPrice: product?.price,
+        productTitle: product?.title,
+      })
+    );
   };
 
   if (isLoading) {
@@ -85,17 +97,53 @@ function Page() {
               <p>Discount</p>
               <p className="">{`${product?.discountPercentage}%`}</p>
             </div>
+            <div className="flex">
+              {/*Quantity*/}
+              <div className="flex items-center justify-between w-28 p-2 ml-4 border border-gray-700 rounded-full">
+                <button
+                  onClick={() => {
+                    if (quantity === 1) {
+                      return;
+                    } else {
+                      setQuantity(quantity - 1);
+                    }
+                  }}
+                  className="text-xl text-gray-600 px-2 leading-none cursor-pointer transition-colors hover:text-gray-900"
+                  aria-label="Decrease quantity"
+                >
+                  -
+                </button>
 
-            <button className="w-1/5 p-2 ml-4 text-[black] border rounded-3xl text-[#f7f3f7]">
-              1
-            </button>
-            <button
-              type="submit"
-              className="w-1/3 p-2 ml-4 bg-black rounded-4xl text-[#f7f3f7] cursor-pointer"
-              onClick={addToCartHandler}
-            >
-              Add to cart
-            </button>
+                <p className="text-base font-medium text-gray-900 select-none">
+                  {quantity}
+                </p>
+
+                <button
+                  onClick={() => {
+                    if (quantity === 10) {
+                      return;
+                    } else {
+                      setQuantity(quantity + 1);
+                    }
+                  }}
+                  className="text-xl text-gray-600 px-2 leading-none cursor-pointer transition-colors hover:text-gray-900"
+                  aria-label="Increase quantity"
+                >
+                  +
+                </button>
+              </div>
+              {/*Add to cart button*/}
+              <button
+                type="submit"
+                className="w-1/3 p-2 ml-4 bg-black rounded-4xl text-[#f7f3f7] cursor-pointer"
+                onClick={addToCartHandler}
+              >
+                {products.find((p) => p.id === product?.id)
+                  ? "Added to cart"
+                  : "Add to cart"}
+              </button>
+            </div>
+
             <h3 className="text-2xl font-semibold my-5 pl-4">
               Product details
             </h3>
@@ -108,6 +156,8 @@ function Page() {
           </div>
         </div>
       </div>
+
+      {/*Customer review section*/}
       <div className=" border w-3/4 mx-auto h-100 mt-10 ">
         <h3 className="text-2xl font-semibold ml-10 mt-10 pb-3 w-8/9 border-b border-gray-200 ">
           Customer Reviews

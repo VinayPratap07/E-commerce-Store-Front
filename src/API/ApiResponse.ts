@@ -16,4 +16,7 @@ export interface productType {
   thumbnail: string;
   title: string;
   warrantyInformation: string;
+  quantity: number;
+  total: number;
+  discountedTotal: number;
 }

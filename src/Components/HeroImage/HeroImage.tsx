@@ -15,7 +15,7 @@ function HeroImage() {
   } = useQuery({
     queryKey: ["HeroImage"],
     queryFn: fetchImage,
-    staleTime: 10000,
+    staleTime: 1000 * 60 * 5,
     refetchOnWindowFocus: false,
     refetchOnMount: false,
   });

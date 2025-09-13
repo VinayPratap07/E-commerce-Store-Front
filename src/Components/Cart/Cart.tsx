@@ -1,40 +1,7 @@
-import { useDispatch, useSelector } from "react-redux";
-import { createCart } from "../../API/ApiCall";
+import { useSelector } from "react-redux";
 import type { RootState } from "../../Store/Store";
-import { addCartId } from "../../Slices/CartSlice";
-import { useMutation } from "@tanstack/react-query";
-import { useEffect } from "react";
-
-async function creatingCart() {
-  let res = await createCart();
-  return res;
-}
-
 function Cart() {
-  const dispatch = useDispatch();
   const state = useSelector((state: RootState) => state.cart);
-
-  const createCartMutation = useMutation({
-    mutationFn: creatingCart,
-    onSuccess: (data) => {
-      console.log("Cart created successfully:", data);
-      dispatch(addCartId(data.id));
-    },
-    onError: (error) => {
-      console.error("Failed to create cart:", error);
-    },
-  });
-
-  useEffect(() => {
-    if (
-      state.cartId === null &&
-      state.products.length > 0 &&
-      !createCartMutation.isPending
-    ) {
-      console.log("Creating a new cart...");
-      createCartMutation.mutate();
-    }
-  }, [state.cartId, state.products, createCartMutation.isPending]);
 
   if (state.products.length === 0) {
     return (
@@ -104,22 +71,56 @@ function Cart() {
     );
   } else {
     return (
-      <div className="border max-w-3/4 mx-auto mt-5 p-5">
+      <div className="max-w-3/4 mx-auto mt-5 p-5">
         <h3 className="font-semibold text-4xl p-4">Your cart</h3>
         <p className="p-4 font-overpass">
           Spend an extra £12 to get FREE Standard UK Shipping
         </p>
         <div className=" grid grid-cols-3 font-normal text-sm text-gray-600 w-full mt-10 p-5">
           <p className="">Product</p>
-          <p className=" text-end pr-5">Quantity</p>
-          <p className=" text-end ">Total</p>
+          <p className=" text-center ml-50">Quantity</p>
+          <p className=" text-center ml-50">Total</p>
         </div>
         <hr className="w-340 mx-auto border-b border-gray-200 "></hr>
-        <div className="flex flex-wrap justify-center p-4">
-          <div className="border w-2/5 h-50"></div>
-          <div className="border w-7/20 h-50"></div>
-          <div className="border w-1/4 h-50"></div>
-        </div>
+        {state.products.map((p) => (
+          <div className="flex flex-wrap justify-center p-5" key={p.id}>
+            {/*Product box*/}
+            <div className="flex flex-wrap items-center w-2/5 h-50">
+              <img src={p.image} alt={p.title} className="w-30 h-30" />
+              <div className="w-1/2">
+                <p className="w-2/3">{p.title}</p>
+                <p className="w-1/2">${p.price}</p>
+              </div>
+            </div>
+
+            {/*Quantity box*/}
+            <div className="flex items-center justify-center w-7/20 h-50">
+              <div className="flex items-center justify-between w-28 p-2 ml-4 border border-gray-700 rounded-full">
+                <button
+                  className="text-xl text-gray-600 px-2 leading-none cursor-pointer transition-colors hover:text-gray-900"
+                  aria-label="Decrease quantity"
+                >
+                  -
+                </button>
+
+                <p className="text-base font-medium text-gray-900 select-none">
+                  {p.quantity}
+                </p>
+
+                <button
+                  className="text-xl text-gray-600 px-2 leading-none cursor-pointer transition-colors hover:text-gray-900"
+                  aria-label="Increase quantity"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+            {/*Total box*/}
+            <div className="flex flex-wrap justify-end items-center w-1/4 h-50 p-20">
+              <p className=" font-semibold"> ${p.quantity * p.price}</p>
+            </div>
+          </div>
+        ))}
       </div>
     );
   }
