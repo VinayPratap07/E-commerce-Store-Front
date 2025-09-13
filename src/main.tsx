@@ -10,6 +10,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Provider } from "react-redux";
 import { store } from "./Store/Store.ts";
 import Page from "./Components/ProductPage/Page.tsx";
+import Login from "./Components/LogInPage/LogInPage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: "/:id",
         element: <Page />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
       },
     ],
   },

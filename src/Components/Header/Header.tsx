@@ -35,12 +35,13 @@ function Header() {
           <NavLink to="/cart" className="headerNavLink textFont">
             <CartIcon className="h-5 w-5" />
           </NavLink>
-          <NavLink to="/" className="headerNavLink textFont ">
+          <NavLink to="/login" className="headerNavLink textFont ">
             <UserIcon className="h-5 w-5" />
           </NavLink>
         </div>
       </div>
 
+      {/*Category */}
       <div className="flex justify-between items-end mx-auto w-1/3 h-1/2">
         <NavLink
           to="/"

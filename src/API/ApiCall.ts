@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const ACCESS_KEY = "SfnQPjSaLq9_Iq7wBbBT77jit3w_teT4apUGYhYD5lk"; //Hero Image API key
+const ACCESS_KEY = ""; //Hero Image API key
 
 export const heroImageApi = async () => {
   const res = await axios.get(
