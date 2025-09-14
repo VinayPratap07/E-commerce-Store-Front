@@ -12,7 +12,7 @@ function Login() {
   };
 
   return (
-    <div className="font-inter text-gray-900 min-h-screen flex items-center justify-center p-4">
+    <div className="font-inter text-gray-900 min-h-150 flex items-center justify-center p-4">
       <div className="w-full max-w-sm text-center">
         {/* Main Heading */}
         <h1 className="font-poppins text-4xl font-bold mb-8">Login</h1>
@@ -26,7 +26,7 @@ function Login() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email"
               required
-              className="w-full px-5 py-3 border border-gray-300 rounded-full bg-transparent focus:outline-none focus:border-blue-500 transition-colors"
+              className="w-full px-5 py-3 border border-gray-300 rounded-full bg-transparent focus:outline-none focus:border-black transition-colors"
             />
           </div>
 
@@ -38,7 +38,7 @@ function Login() {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
               required
-              className="w-full px-5 py-3 border border-gray-300 rounded-full bg-transparent focus:outline-none focus:border-blue-500 transition-colors"
+              className="w-full px-5 py-3 border border-gray-300 rounded-full bg-transparent focus:outline-none focus:border-black transition-colors"
             />
           </div>
 
