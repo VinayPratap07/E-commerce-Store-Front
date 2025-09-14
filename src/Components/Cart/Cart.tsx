@@ -1,7 +1,13 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../../Store/Store";
+import {
+  decreaseQuantity,
+  increaseQuantity,
+  removeFromCart,
+} from "../../Slices/CartSlice";
 function Cart() {
   const state = useSelector((state: RootState) => state.cart);
+  const dispatch = useDispatch();
 
   if (state.products.length === 0) {
     return (
@@ -99,6 +105,7 @@ function Cart() {
                 <button
                   className="text-xl text-gray-600 px-2 leading-none cursor-pointer transition-colors hover:text-gray-900"
                   aria-label="Decrease quantity"
+                  onClick={() => dispatch(decreaseQuantity(p.id))}
                 >
                   -
                 </button>
@@ -110,10 +117,18 @@ function Cart() {
                 <button
                   className="text-xl text-gray-600 px-2 leading-none cursor-pointer transition-colors hover:text-gray-900"
                   aria-label="Increase quantity"
+                  onClick={() => dispatch(increaseQuantity(p.id))}
                 >
                   +
                 </button>
               </div>
+              {/*Bin button*/}
+              <button
+                className="relative left-4 cursor-pointer"
+                onClick={() => dispatch(removeFromCart(p.id))}
+              >
+                <BinIcon className="h-6 w-6 text-gary-500 hover:text-red-500" />
+              </button>
             </div>
             {/*Total box*/}
             <div className="flex flex-wrap justify-end items-center w-1/4 h-50 p-20">
@@ -127,3 +142,31 @@ function Cart() {
 }
 
 export default Cart;
+
+type IconProps = {
+  className?: string; // className is an optional string
+};
+
+const BinIcon = ({ className }: IconProps) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    {/* Bin body */}
+    <rect x="6" y="7" width="12" height="13" rx="2" />
+    {/* Lid */}
+    <path d="M4 7h16" />
+    <path d="M9 7V5h6v2" />
+    {/* Inner lines */}
+    <line x1="10" y1="11" x2="10" y2="17" />
+    <line x1="14" y1="11" x2="14" y2="17" />
+  </svg>
+);
