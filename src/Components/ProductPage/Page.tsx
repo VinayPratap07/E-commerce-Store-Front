@@ -2,9 +2,13 @@ import { useQuery } from "@tanstack/react-query";
 import { productById } from "../../API/ApiCall";
 import { useParams } from "react-router-dom";
 import type { productType } from "../../API/ApiResponse";
-import { addToCart } from "../../Slices/CartSlice.ts";
+import {
+  addToCart,
+  decreaseQuantity,
+  increaseQuantity,
+} from "../../Slices/CartSlice.ts";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { RootState } from "../../Store/Store.ts";
 
 function Page() {
@@ -31,7 +35,7 @@ function Page() {
     refetchOnMount: false,
   });
 
-  const addToCartHandler = async () => {
+  const addToCartHandler = () => {
     dispatch(
       addToCart({
         productId: product?.id,
@@ -42,6 +46,12 @@ function Page() {
       })
     );
   };
+  useEffect(() => {
+    const existingProduct = products.find((p) => p.id === product?.id);
+    if (existingProduct) {
+      setQuantity(existingProduct.quantity);
+    }
+  }, []);
 
   if (isLoading) {
     return <div>Loading</div>;
@@ -106,6 +116,7 @@ function Page() {
                       return;
                     } else {
                       setQuantity(quantity - 1);
+                      dispatch(decreaseQuantity(product?.id));
                     }
                   }}
                   className="text-xl text-gray-600 px-2 leading-none cursor-pointer transition-colors hover:text-gray-900"
@@ -124,6 +135,7 @@ function Page() {
                       return;
                     } else {
                       setQuantity(quantity + 1);
+                      dispatch(increaseQuantity(product?.id));
                     }
                   }}
                   className="text-xl text-gray-600 px-2 leading-none cursor-pointer transition-colors hover:text-gray-900"

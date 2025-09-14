@@ -51,14 +51,22 @@ export const cartSlice = createSlice({
       const id = action.payload;
       const existingProduct = state.products.find((p) => p.id === id);
       if (existingProduct) {
-        existingProduct.quantity++;
+        if (existingProduct.quantity === 10) {
+          return;
+        } else {
+          existingProduct.quantity++;
+        }
       }
     },
     decreaseQuantity: (state, action) => {
       const id = action.payload;
       const existingProduct = state.products.find((p) => p.id === id);
       if (existingProduct) {
-        existingProduct.quantity--;
+        if (existingProduct.quantity === 1) {
+          return;
+        } else {
+          existingProduct.quantity--;
+        }
       }
     },
   },
