@@ -10,6 +10,8 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import type { RootState } from "../../Store/Store.ts";
+import Loader from "../Loader/Loader.tsx";
+import Error from "../Error/Error.tsx";
 
 function Page() {
   const { id } = useParams();
@@ -54,10 +56,10 @@ function Page() {
   }, []);
 
   if (isLoading) {
-    return <div>Loading</div>;
+    return <Loader />;
   }
   if (error) {
-    return <div>Error</div>;
+    return <Error />;
   }
 
   return (

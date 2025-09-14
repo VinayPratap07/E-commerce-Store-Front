@@ -1,5 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { heroImageApi } from "../../API/ApiCall";
+import Loader from "../Loader/Loader";
+import Error from "../Error/Error";
 
 async function fetchImage() {
   const images = await heroImageApi();
@@ -21,10 +23,10 @@ function HeroImage() {
   });
 
   if (isLoading) {
-    return <div>Loading</div>;
+    return <Loader />;
   }
   if (error) {
-    return <div>Error</div>;
+    return <Error />;
   }
 
   return (
