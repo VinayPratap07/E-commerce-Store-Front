@@ -1,12 +1,4 @@
 @font-face {
-  font-family: Inter;
-  src: url(assets/Fonts/Inter_18pt-Medium.ttf);
-}
-@font-face {
-  font-family: Poppins;
-  src: url(assets/Fonts/Poppins-Bold.ttf);
-}
-@font-face {
   font-family: Epunda;
   src: url(assets/Fonts/EpundaSlab-Medium.ttf);
 }
@@ -18,8 +10,6 @@
 @import "tailwindcss";
 
 @theme {
-  --font-Inter: Inter, "sans-serif";
-  --font-Poppins: Poppins, "sans-serif";
   --font-Epunda: Epunda, "sans-serif";
   --font-Jakarta: PlusJakarta, "sans-serif";
 }
@@ -27,9 +17,6 @@
 @layer components {
   .headerNavLink {
     @apply px-3 py-2 text-base text-[#111827] font-normal transform transition-transform duration-200 hover:scale-105 hover:font-medium;
-  }
-  .mobileNavLink {
-    @apply py-2 text-xl text-black hover:text-blue-600;
   }
 
   .textFont {

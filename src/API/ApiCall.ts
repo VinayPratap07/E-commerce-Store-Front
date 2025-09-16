@@ -20,3 +20,11 @@ export const productById = async (id: string) => {
   const res = await axios.get(`https://dummyjson.com/products/${id}`);
   return res.data;
 };
+
+//DummyJson to get a product by catrgory
+export const productByCategory = async (category: string) => {
+  const res = await axios.get(
+    `https://dummyjson.com/products/category/${category}`
+  );
+  return res.data;
+};

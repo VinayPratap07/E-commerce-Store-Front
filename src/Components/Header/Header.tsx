@@ -1,6 +1,9 @@
+import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import type { RootState } from "../../Store/Store";
 
 function Header() {
+  const state = useSelector((state: RootState) => state.cart);
   return (
     <div className="sticky z-40 top-0 right-0 left-0 grid-cols-2 text-center bg-[#f5f2f1] h-40 w-full rounded-b-4xl p-5 pt-5 ">
       <div className="flex justify-between items-start h-1/2">
@@ -31,13 +34,15 @@ function Header() {
               placeholder="Search "
             />
           </div>
-
-          <NavLink to="/cart" className="headerNavLink textFont">
-            <CartIcon className="h-5 w-5" />
-          </NavLink>
           <NavLink to="/login" className="headerNavLink textFont ">
             <UserIcon className="h-5 w-5" />
           </NavLink>
+          <NavLink to="/cart" className="headerNavLink textFont">
+            <CartIcon className="h-5 w-5" />
+          </NavLink>
+          <span className="absolute text-black text-xs">
+            {state.products.length === 0 ? "" : state.products.length}
+          </span>
         </div>
       </div>
 
