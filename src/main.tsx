@@ -11,6 +11,7 @@ import { Provider } from "react-redux";
 import { store } from "./Store/Store.ts";
 import Page from "./Components/ProductPage/Page.tsx";
 import Login from "./Components/LogInPage/LogInPage.tsx";
+import MensCategory from "./Components/Categories/MensCategory.tsx";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,7 @@ const router = createBrowserRouter([
         path: "/login",
         element: <Login />,
       },
+      { path: "/men's", element: <MensCategory /> },
     ],
   },
 ]);

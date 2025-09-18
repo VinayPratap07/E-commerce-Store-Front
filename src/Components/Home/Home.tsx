@@ -3,11 +3,18 @@ import { productByCategory } from "../../API/ApiCall";
 import Card from "../Card/Card";
 import HeroImage from "../HeroImage/HeroImage";
 import { NavLink } from "react-router-dom";
+import CommitmentSection from "../OurCommitment/Commitment";
+import { productApi } from "../../API/ApiCall";
+import type { productType } from "../../API/ApiResponse";
 
 async function getSpecialProduct(category: string) {
   const res = await productByCategory(category);
-  console.log(res);
   return res;
+}
+
+async function fetchProduct() {
+  const res = await productApi();
+  return res.products;
 }
 
 function Home() {
@@ -21,13 +28,20 @@ function Home() {
         queryKey: ["specialProduct", "mens-watches"],
         queryFn: () => getSpecialProduct("mens-watches"),
       },
+      {
+        queryKey: ["CardProducts"],
+        queryFn: () => fetchProduct(),
+      },
     ],
   });
-  const [womensBagsQuery, mensWatchesQuery] = results;
+  const [womensBagsQuery, mensWatchesQuery, cardProductsQuery] = results;
+
   if (womensBagsQuery.isLoading || mensWatchesQuery.isLoading)
     return <p>Loading...</p>;
   if (womensBagsQuery.error || mensWatchesQuery.error)
     return <p>Error loading products</p>;
+
+  const products = cardProductsQuery.data || [];
 
   return (
     <div className="w-full">
@@ -37,14 +51,15 @@ function Home() {
           You'll love
         </h2>
         <div className=" flex items-end space-x-4 overflow-x-auto scrollbar-hide w-full h-89 p-5 scrollbar-hide">
-          <Card />
+          {products
+            .filter((product: productType) => product.category !== "groceries")
+            .map((product: productType) => (
+              <Card key={product.id} {...product} />
+            ))}
         </div>
       </div>
 
       {/*Specials Section */}
-      <h2 className="font-Epunda4 tracking-wide font-semibold text-4xl p-5 text-center ">
-        Gift's
-      </h2>
       <div className="flex flex-wrap justify-center items-center w-full h-130 ">
         {/*Specials Section 1*/}
         <div className="flex flex-wrap justify-center content-center  w-1/3 h-9/10 p-5 mr-4 rounded-xl shadow-xl transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-100 hover:shadow-2xl">
@@ -78,6 +93,7 @@ function Home() {
           </NavLink>
         </div>
       </div>
+      <CommitmentSection />
     </div>
   );
 }

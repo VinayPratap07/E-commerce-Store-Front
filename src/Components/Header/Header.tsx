@@ -49,26 +49,42 @@ function Header() {
       {/*Category */}
       <div className="flex justify-between items-end mx-auto w-1/3 h-1/2">
         <NavLink
-          to="/"
-          className="headerNavLink textFont hover:border-b-1 hover:border-black"
+          to="/men's"
+          className={({ isActive }) =>
+            isActive
+              ? "headerNavLink textFont border-b-1 border-black font-semibold"
+              : "headerNavLink textFont hover:border-b-1 hover:border-black"
+          }
         >
           Men
         </NavLink>
         <NavLink
           to="/"
-          className="headerNavLink  textFont hover:border-b-1 hover:border-black"
+          className={({ isActive }) =>
+            isActive
+              ? "headerNavLink textFont border-b-1 border-black font-semibold"
+              : "headerNavLink textFont hover:border-b-1 hover:border-black"
+          }
         >
           Women
         </NavLink>
         <NavLink
           to="/"
-          className="headerNavLink textFont hover:border-b-1 hover:border-black"
+          className={({ isActive }) =>
+            isActive
+              ? "headerNavLink textFont border-b-1 border-black font-semibold"
+              : "headerNavLink textFont hover:border-b-1 hover:border-black"
+          }
         >
           Kids
         </NavLink>
         <NavLink
           to="/"
-          className="headerNavLink textFont hover:border-b-1 hover:border-black"
+          className={({ isActive }) =>
+            isActive
+              ? "headerNavLink textFont border-b-1 border-black font-semibold"
+              : "headerNavLink textFont hover:border-b-1 hover:border-black"
+          }
         >
           Electronics
         </NavLink>
