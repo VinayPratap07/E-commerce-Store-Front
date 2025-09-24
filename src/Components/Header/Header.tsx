@@ -1,102 +1,176 @@
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import type { RootState } from "../../Store/Store";
+import { useState } from "react";
 
 function Header() {
   const state = useSelector((state: RootState) => state.cart);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
-    <div className="sticky z-40 top-0 right-0 left-0 grid-cols-2 text-center bg-[#f5f2f1] h-40 w-full rounded-b-4xl p-5 pt-5 ">
-      <div className="flex justify-between items-start h-1/2">
-        {/* First box */}
-        <div className="w-1/3 h-full  p-2">
-          <LightIcon className="h-5 w-5" />
+    <>
+      <div className="sticky z-40 top-0 right-0 left-0 grid grid-cols-1 text-center bg-[#f5f2f1] h-32 md:h-40 w-full rounded-b-4xl p-4 md:p-5">
+        <div className="flex flex-col h-full">
+          <div className="flex justify-between items-center h-1/2">
+            <div className="w-1/4 md:w-1/3 flex justify-start items-start p-2">
+              <button
+                onClick={() => setIsMenuOpen(true)}
+                className="md:hidden p-2"
+              >
+                <MenuIcon className="h-6 w-6" />
+              </button>
+              <div className="hidden md:block">
+                <LightIcon className="h-5 w-5" />
+              </div>
+            </div>
+
+            <div className="w-1/2 md:w-1/3 flex justify-center items-start">
+              <NavLink to="/">
+                <h1 className="font-Epunda text-3xl md:text-4xl text-[#111827] tracking-widest">
+                  VELORA
+                </h1>
+              </NavLink>
+            </div>
+
+            <div className="relative flex justify-end items-start w-1/4 md:w-1/3 h-full p-2 pr-0 md:pr-5 text-xl textFont gap-x-3 md:gap-x-4">
+              <div className="hidden md:flex justify-center items-center w-1/2 border-b border-gray-200 focus-within:border-gray-700">
+                <button type="submit" className="text-black p-2">
+                  <SearchIcon className="h-5 w-5" />
+                </button>
+                <input
+                  type="text"
+                  className="w-full p-2 text-sm bg-transparent focus:outline-none"
+                  placeholder="Search"
+                />
+              </div>
+              <NavLink to="/login" className="headerNavLink textFont">
+                <UserIcon className="h-5 w-5" />
+              </NavLink>
+              <NavLink to="/cart" className="headerNavLink textFont">
+                <CartIcon className="h-5 w-5" />
+              </NavLink>
+              <span className="relative right-5 md:right-5 text-black text-xs">
+                {state.products.length === 0 ? "" : state.products.length}
+              </span>
+            </div>
+          </div>
+
+          <div className="hidden lg:flex justify-around items-center w-full lg:w-1/3 h-1/2 mx-auto">
+            <NavLink
+              to="/men's"
+              className={({ isActive }) =>
+                isActive
+                  ? "headerNavLink textFont border-b-1 border-black font-semibold"
+                  : "headerNavLink textFont hover:border-b-1 hover:border-black"
+              }
+            >
+              Men
+            </NavLink>
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive
+                  ? "headerNavLink textFont border-b-1 border-black font-semibold"
+                  : "headerNavLink textFont hover:border-b-1 hover:border-black"
+              }
+            >
+              Women
+            </NavLink>
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive
+                  ? "headerNavLink textFont border-b-1 border-black font-semibold"
+                  : "headerNavLink textFont hover:border-b-1 hover:border-black"
+              }
+            >
+              Kids
+            </NavLink>
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive
+                  ? "headerNavLink textFont border-b-1 border-black font-semibold"
+                  : "headerNavLink textFont hover:border-b-1 hover:border-black"
+              }
+            >
+              Electronics
+            </NavLink>
+          </div>
+        </div>
+      </div>
+
+      <div
+        className={`fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity duration-300 ${
+          isMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+        onClick={() => setIsMenuOpen(false)}
+      ></div>
+
+      <div
+        className={`fixed top-0 left-0 h-full w-4/5 max-w-xs bg-[#f5f2f1] shadow-xl z-50 transform transition-transform duration-300 ease-in-out ${
+          isMenuOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
+        <div className="flex justify-between items-center p-4 border-b border-gray-200">
+          <h2 className="font-semibold text-lg">Menu</h2>
+          <button onClick={() => setIsMenuOpen(false)} className="p-2">
+            <CloseIcon className="h-6 w-6" />
+          </button>
         </div>
 
-        {/* Second Box */}
-        <div className="flex w-1/3 h-full p-2 justify-center items-start">
-          <NavLink to="/">
-            <h1 className="font-Epunda text-3xl md:text-4xl text-[#111827] tracking-widest">
-              VELORA
-            </h1>
-          </NavLink>
-        </div>
-
-        {/* Third box */}
-        <div className=" flex justify-end items-start w-1/3 h-1/2 p-2 pr-5 text-xl textFont ">
-          {/*Inside Box*/}
-          <div className="hidden md:flex justify-center items-center w-1/2 border-b border-gray-200 focus-within:border-gray-700">
+        <div className="p-4">
+          <div className="flex justify-center items-center w-full border-b border-gray-200 focus-within:border-gray-700 mb-6">
             <button type="submit" className="text-black p-2">
               <SearchIcon className="h-5 w-5" />
             </button>
             <input
               type="text"
               className="w-full p-2 text-sm bg-transparent focus:outline-none"
-              placeholder="Search "
+              placeholder="Search"
             />
           </div>
-          <NavLink to="/login" className="headerNavLink textFont ">
-            <UserIcon className="h-5 w-5" />
-          </NavLink>
-          <NavLink to="/cart" className="headerNavLink textFont">
-            <CartIcon className="h-5 w-5" />
-          </NavLink>
-          <span className="absolute text-black text-xs">
-            {state.products.length === 0 ? "" : state.products.length}
-          </span>
+
+          <nav className="flex flex-col space-y-4">
+            <NavLink
+              to="/men's"
+              className="text-left p-2 rounded hover:bg-gray-200"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Men
+            </NavLink>
+            <NavLink
+              to="/"
+              className="text-left p-2 rounded hover:bg-gray-200"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Women
+            </NavLink>
+            <NavLink
+              to="/"
+              className="text-left p-2 rounded hover:bg-gray-200"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Kids
+            </NavLink>
+            <NavLink
+              to="/"
+              className="text-left p-2 rounded hover:bg-gray-200"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Electronics
+            </NavLink>
+          </nav>
         </div>
       </div>
-
-      {/*Category */}
-      <div className="flex justify-between items-end mx-auto w-1/3 h-1/2">
-        <NavLink
-          to="/men's"
-          className={({ isActive }) =>
-            isActive
-              ? "headerNavLink textFont border-b-1 border-black font-semibold"
-              : "headerNavLink textFont hover:border-b-1 hover:border-black"
-          }
-        >
-          Men
-        </NavLink>
-        <NavLink
-          to="/"
-          className={({ isActive }) =>
-            isActive
-              ? "headerNavLink textFont border-b-1 border-black font-semibold"
-              : "headerNavLink textFont hover:border-b-1 hover:border-black"
-          }
-        >
-          Women
-        </NavLink>
-        <NavLink
-          to="/"
-          className={({ isActive }) =>
-            isActive
-              ? "headerNavLink textFont border-b-1 border-black font-semibold"
-              : "headerNavLink textFont hover:border-b-1 hover:border-black"
-          }
-        >
-          Kids
-        </NavLink>
-        <NavLink
-          to="/"
-          className={({ isActive }) =>
-            isActive
-              ? "headerNavLink textFont border-b-1 border-black font-semibold"
-              : "headerNavLink textFont hover:border-b-1 hover:border-black"
-          }
-        >
-          Electronics
-        </NavLink>
-      </div>
-    </div>
+    </>
   );
 }
 
 export default Header;
 
 type IconProps = {
-  className?: string; // className is an optional string
+  className?: string;
 };
 
 const SearchIcon = ({ className }: IconProps) => (
@@ -162,22 +236,6 @@ const CartIcon = ({ className }: IconProps) => (
       strokeLinecap="round"
       strokeLinejoin="round"
       d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-    />
-  </svg>
-);
-const WishlistIcon = ({ className }: IconProps) => (
-  <svg
-    className={className}
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke="currentColor"
-    strokeWidth={2}
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      d="M4.318 6.318a4.5 4.5 0 016.364 0L12 7.672l1.318-1.354a4.5 4.5 0 116.364 6.364L12 20.364l-7.682-7.682a4.5 4.5 0 010-6.364z"
     />
   </svg>
 );

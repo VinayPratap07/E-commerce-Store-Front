@@ -63,35 +63,31 @@ function Page() {
   }
 
   return (
-    <div className="">
-      {/*Main box */}
-
-      <div className="grid grid-flow-col grid-cols-2 gap-4  w-full p-10">
-        {/*First box*/}
-        <div className="flex">
-          <div className="w-1/4 h-full">
+    <div>
+      <div className="grid grid-cols-1 lg:grid-cols-2 lg:grid-flow-col gap-4 w-full p-4 md:p-10">
+        <div className="flex flex-col lg:flex-row">
+          <div className="lg:w-1/4 lg:h-full order-2 lg:order-1 flex flex-row lg:flex-col gap-x-4 overflow-x-auto">
             {product?.images.map((img, index) => (
               <img
                 key={index}
                 src={img}
                 alt={`product-${index}`}
-                className="w-30 h-30 object-cover rounded border m-4"
+                className="w-24 h-24 lg:w-30 lg:h-30 object-cover rounded border m-2 lg:m-4 flex-shrink-0"
               />
             ))}
           </div>
-          <div className="flex justify-center items-center w-3/4 h-full mx-auto">
+          <div className="flex justify-center items-center w-full lg:w-3/4 h-full mx-auto order-1 lg:order-2">
             <img
-              className="cover"
+              className="cover rounded-lg"
               src={product?.thumbnail}
               alt={product?.title}
             />
           </div>
         </div>
 
-        {/*2nd box*/}
-        <div className="  p-5">
-          <div className="w-4/5 ">
-            <p className="flex justify-start text-[#111827] pl-4 text-md font-semibold mt-2 ">
+        <div className="p-0 md:p-5">
+          <div className="w-full lg:w-4/5">
+            <p className="flex justify-start text-[#111827] pl-4 text-md font-semibold mt-2">
               {[...Array(5)].map((_, index) => (
                 <StarIcon
                   key={index}
@@ -105,12 +101,14 @@ function Page() {
             </h2>
             <p className="font-lg font-semibold pl-4 mb-5">{`$${product?.price}`}</p>
             <p className="font-lg pl-4 mb-5">{product?.description}</p>
-            <div className="flex justify-between item-center border rounded-2xl w-1/2 p-3 ml-4 mb-5  font-semibold text-xl ">
+
+            <div className="flex justify-between item-center border rounded-2xl w-full md:w-1/2 p-3 ml-4 mb-5 font-semibold text-xl">
               <p>Discount</p>
-              <p className="">{`${product?.discountPercentage}%`}</p>
+              <p>{`${product?.discountPercentage}%`}</p>
             </div>
-            <div className="flex">
-              {/*Quantity*/}
+
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-0 items-center">
+              {/* Quantity */}
               <div className="flex items-center justify-between w-28 p-2 ml-4 border border-gray-700 rounded-full">
                 <button
                   onClick={() => {
@@ -118,6 +116,7 @@ function Page() {
                       return;
                     } else {
                       setQuantity(quantity - 1);
+
                       dispatch(decreaseQuantity(product?.id));
                     }
                   }}
@@ -126,17 +125,16 @@ function Page() {
                 >
                   -
                 </button>
-
                 <p className="text-base font-medium text-gray-900 select-none">
                   {quantity}
                 </p>
-
                 <button
                   onClick={() => {
                     if (quantity === 10) {
                       return;
                     } else {
                       setQuantity(quantity + 1);
+
                       dispatch(increaseQuantity(product?.id));
                     }
                   }}
@@ -146,10 +144,10 @@ function Page() {
                   +
                 </button>
               </div>
-              {/*Add to cart button*/}
+
               <button
                 type="submit"
-                className="w-1/3 p-2 ml-4 bg-black rounded-4xl text-[#f7f3f7] cursor-pointer"
+                className="w-full sm:w-1/3 p-2 ml-0 sm:ml-4 bg-black rounded-4xl text-[#f7f3f7] cursor-pointer"
                 onClick={addToCartHandler}
               >
                 {products.find((p) => p.id === product?.id)
@@ -171,12 +169,11 @@ function Page() {
         </div>
       </div>
 
-      {/*Customer review section*/}
-      <div className=" border w-3/4 mx-auto h-100 mt-10 ">
-        <h3 className="text-2xl font-semibold ml-10 mt-10 pb-3 w-8/9 border-b border-gray-200 ">
+      <div className="border w-full lg:w-3/4 mx-auto h-100 mt-10">
+        <h3 className="text-2xl font-semibold ml-4 md:ml-10 mt-10 pb-3 w-8/9 border-b border-gray-200">
           Customer Reviews
         </h3>
-        <p className="flex justify-start text-[#111827] pl-4 text-md font-semibold mt-2 ">
+        <p className="flex justify-start text-[#111827] pl-4 text-md font-semibold mt-2">
           {[...Array(5)].map((_, index) => (
             <StarIcon
               key={index}

@@ -59,38 +59,40 @@ function Home() {
         </div>
       </div>
 
-      {/*Specials Section */}
-      <div className="flex flex-wrap justify-center items-center w-full h-130 ">
-        {/*Specials Section 1*/}
-        <div className="flex flex-wrap justify-center content-center  w-1/3 h-9/10 p-5 mr-4 rounded-xl shadow-xl transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-100 hover:shadow-2xl">
-          <img src={mensWatchesQuery.data.products[0].thumbnail} className="" />
-          <p className="w-full font-textFont font-semibold text-3xl text-center ">
+      <div className="flex flex-wrap justify-center items-center w-full h-auto py-12 px-4 gap-8">
+        <div className="flex flex-col justify-center items-center w-full sm:w-2/3 md:w-5/12 lg:w-1/3 p-5 rounded-xl shadow-xl transition duration-300 ease-in-out hover:-translate-y-1 hover:shadow-2xl">
+          <img
+            src={mensWatchesQuery.data.products[0].thumbnail}
+            className="max-w-full h-auto"
+            alt={mensWatchesQuery.data.products[0].title}
+          />
+          <p className="w-full font-textFont font-semibold text-2xl md:text-3xl text-center mt-6">
             {mensWatchesQuery.data.products[0].title}
           </p>
-          <NavLink
-            to={`/${mensWatchesQuery.data.products[0].id}`}
-            className="w-full text-center mt-4"
-          >
-            <button className="w-1/5 p-3 rounded-4xl text-white bg-black cursor-pointer">
-              Checkout
-            </button>
-          </NavLink>
+          <div className="w-full text-center mt-4">
+            <NavLink to={`${mensWatchesQuery.data.products[0].id}`}>
+              <button className="w-1/2 sm:w-2/5 lg:w-1/3 p-3 rounded-full text-white bg-black cursor-pointer">
+                Checkout
+              </button>
+            </NavLink>
+          </div>
         </div>
-
-        {/*Specials Section 2*/}
-        <div className="flex flex-wrap justify-center content-center  w-1/3 h-9/10 p-5 mr-4 rounded-xl shadow-xl transition duration-300 ease-in-out hover:-translate-y-1 hover:scale-100 hover:shadow-2xl">
-          <img src={womensBagsQuery.data.products[0].thumbnail} className="" />
-          <p className="w-full font-semibold text-3xl text-center ">
+        <div className="flex flex-col justify-center items-center w-full sm:w-2/3 md:w-5/12 lg:w-1/3 p-5 rounded-xl shadow-xl transition duration-300 ease-in-out hover:-translate-y-1 hover:shadow-2xl">
+          <img
+            src={womensBagsQuery.data.products[0].thumbnail}
+            className="max-w-full h-auto"
+            alt={womensBagsQuery.data.products[0].title}
+          />
+          <p className="w-full font-semibold text-2xl md:text-3xl text-center mt-6">
             {womensBagsQuery.data.products[0].title}
           </p>
-          <NavLink
-            to={`/${womensBagsQuery.data.products[0].id}`}
-            className="w-full text-center mt-4"
-          >
-            <button className="w-1/5 p-3 rounded-4xl text-white bg-black cursor-pointer">
-              Checkout
-            </button>
-          </NavLink>
+          <div className="w-full text-center mt-4">
+            <NavLink to={`${womensBagsQuery.data.products[0].id}`}>
+              <button className="w-1/2 sm:w-2/5 lg:w-1/3 p-3 rounded-full text-white bg-black cursor-pointer">
+                Checkout
+              </button>
+            </NavLink>
+          </div>
         </div>
       </div>
       <CommitmentSection />
