@@ -28,6 +28,9 @@ function HeroImage() {
   if (error) {
     return <Error />;
   }
+  if (!Images || Images.length === 0) {
+    return <Error />;
+  }
 
   return (
     <div className="relative w-full h-150 md:h-128 lg:h-[680px] shadow-lg">

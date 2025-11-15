@@ -6,6 +6,8 @@ import { NavLink } from "react-router-dom";
 import CommitmentSection from "../OurCommitment/Commitment";
 import { productApi } from "../../API/ApiCall";
 import type { productType } from "../../API/ApiResponse";
+import Error from "../Error/Error";
+import Loader from "../Loader/Loader";
 
 async function getSpecialProduct(category: string) {
   const res = await productByCategory(category);
@@ -37,9 +39,8 @@ function Home() {
   const [womensBagsQuery, mensWatchesQuery, cardProductsQuery] = results;
 
   if (womensBagsQuery.isLoading || mensWatchesQuery.isLoading)
-    return <p>Loading...</p>;
-  if (womensBagsQuery.error || mensWatchesQuery.error)
-    return <p>Error loading products</p>;
+    return <Loader />;
+  if (womensBagsQuery.error || mensWatchesQuery.error) return <Error />;
 
   const products = cardProductsQuery.data || [];
 

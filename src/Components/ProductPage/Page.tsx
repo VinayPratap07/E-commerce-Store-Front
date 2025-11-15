@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import type { RootState } from "../../Store/Store.ts";
 import Loader from "../Loader/Loader.tsx";
 import Error from "../Error/Error.tsx";
+import CustomerReviews from "./CustomerReview.tsx";
 
 function Page() {
   const { id } = useParams();
@@ -63,7 +64,7 @@ function Page() {
   }
 
   return (
-    <div>
+    <div className="bg-white">
       <div className="grid grid-cols-1 lg:grid-cols-2 lg:grid-flow-col gap-4 w-full p-4 md:p-10">
         <div className="flex flex-col lg:flex-row">
           <div className="lg:w-1/4 lg:h-full order-2 lg:order-1 flex flex-row lg:flex-col gap-x-4 overflow-x-auto">
@@ -168,20 +169,11 @@ function Page() {
           </div>
         </div>
       </div>
-
-      <div className="border w-full lg:w-3/4 mx-auto h-100 mt-10">
-        <h3 className="text-2xl font-semibold ml-4 md:ml-10 mt-10 pb-3 w-8/9 border-b border-gray-200">
-          Customer Reviews
-        </h3>
-        <p className="flex justify-start text-[#111827] pl-4 text-md font-semibold mt-2">
-          {[...Array(5)].map((_, index) => (
-            <StarIcon
-              key={index}
-              className="h-5 w-5"
-              filled={index < (product?.rating ?? 0)}
-            />
-          ))}
-        </p>
+      <div className="w-full text-center">
+        <h1 className="text-4xl font-bold p-2 my-20">
+          Honest Reviews From Our Happy Customers
+        </h1>
+        <CustomerReviews />
       </div>
     </div>
   );

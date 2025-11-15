@@ -155,7 +155,9 @@ function Cart() {
               <span className="md:hidden font-semibold text-gray-700">
                 Total
               </span>
-              <p className="font-semibold">${p.quantity * p.price}</p>
+              <p className="font-semibold">
+                ${(p.quantity * p.price).toFixed(2)}
+              </p>
             </div>
           </div>
         ))}
@@ -163,14 +165,13 @@ function Cart() {
 
         {/* Total Section */}
         <div className="flex flex-col items-end w-full p-5">
-          <p className="text-xl">Estimated total: ${grandTotal}</p>
+          <p className="text-xl">Estimated total: ${grandTotal.toFixed(2)}</p>
           <p className="text-right text-sm text-gray-500 mt-2">
             Tax included and shipping calculated at checkout.
           </p>
         </div>
 
         <div className="flex justify-end w-full p-1">
-          \
           <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
             <button className="w-full p-3 rounded-full text-white bg-black cursor-pointer hover:bg-gray-800">
               Checkout
